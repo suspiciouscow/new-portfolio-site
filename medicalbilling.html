@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The State of Medical Billing - Miki S-Y</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="writing.html" class="active">Writing</a>
+        </nav>
+
+        <div class="blog-container">
+            <a href="writing.html" class="back-link">← Writing Feed</a>
+
+            <article class="blog-post">
+                <div class="blog-header">
+                    <h1>The State of Medical Billing</h1>
+                    <h2>Why Price Transparency in Healthcare Remains Elusive</h2>
+                    <div class="blog-meta">
+                        <div class="author-info">
+                            <span>Miki S-Y</span>
+                            <span class="meta-divider">|</span>
+                            <span>October 9, 2025</span>
+                            <span class="meta-divider">|</span>
+                            <span>7 min read</span>  
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Article Content -->
+            <div class="blog-content">
+                <p>In 2019, the Trump Administration issued Executive Order 13877 titled <em>"Improving Price and Quality Transparency in American Healthcare To Put Patients First"</em>. It required all hospitals to publish their pricing data in two ways.</p>
+
+                <ol>
+                    <li>as a comprehensive Machine-Readable File (MRF)</li>
+                    <li>in a consumer-friendly format
+                        <ul>
+                            <li>ex. integration into price transparency tools, electronic health records (EHRs), and consumer apps</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p>The MRF is basically a very large JSON or CSV file that contains every single standard charge for every item or service that the hospital provides.</p>
+
+                <p>It contains these five categories:</p>
+
+                <ol>
+                    <li><strong>Gross charge:</strong> the list price before any discounts.</li>
+                    <li><strong>Discounted cash price:</strong> what a patient would pay if they paid cash.</li>
+                    <li><strong>Payer-specific negotiated charge:</strong> what the hospital has agreed to with each insurer.</li>
+                    <li><strong>De-identified minimum negotiated charge:</strong> the lowest negotiated rate among all payers.</li>
+                    <li><strong>De-identified maximum negotiated charge:</strong> the highest negotiated rate among all payers.</li>
+                </ol>
+
+                <p>During the Biden Administration, while they did take some steps towards enforcing and strengthening this order, ultimately a lot of issues emerged and many hospitals did not completely comply. This stemmed from challenges like legacy IT systems, data fragmentation, and capacity constraints.</p>
+
+                <p>These challenges result in noncompliance. The data in these MRFs are usually partially missing and contain place holders like "nine 9s" (999,999,999) which are not allowed. It's unreliable and these files are so large that patients can't look through them nor decode what anything means. The second component of the executive orders is the "consumer-facing search platform" but most hospitals don't do this either. In a study by the <a href="https://jamanetwork.com/journals/jama/fullarticle/2792987" target="_blank">Journal of the American Medical Association</a> (JAMA) recording the rate of hospital compliance in between July 1 and September 30, 2021. The results are shocking and across 5239 total hospitals, 729 (13.9%) had an adherent machine-readable file but no shoppable display, 1542 (29.4%) had an adherent shoppable display but no machine-readable file, and 300 (5.7%) had both. Even as of 2024, OIG found ~37 out of 100 randomly sampled hospitals had noncompliance issues <a href="https://oig.hhs.gov/reports/all/2024/not-all-selected-hospitals-complied-with-the-hospital-price-transparency-rule/" target="_blank">Office of Inspector General</a>. Other reports (e.g. from Patient Rights Advocate) suggest that a majority of hospitals are not fully compliant, some saying that 75% are noncompliant.</p>
+
+                <p>For hospitals that fail to comply under 45 CFR § 180.90(c)(2), the civil monetary penalties (CMPs) can be up to $5500 a day or ~$2M a year. The Centers for Medicare & Medicaid Services (CMS) has the authority to issue penalties, but it rarely does. Between <strong>2021–2023</strong>, CMS initiated <strong>1,287 enforcement actions</strong> yet issued <strong>civil monetary penalties to only 14 hospitals</strong>, totaling just <strong>$4 million</strong> in fines nationwide. (GAO Report, 2024)</p>
+
+                <ul>
+                    <li>With over <strong>6,000 hospitals</strong> in the U.S., the odds of being meaningfully penalized are extremely low.</li>
+                    <li>Most hospitals receive <strong>warning letters</strong> or <strong>corrective action plans (CAPs)</strong> instead of immediate fines.</li>
+                </ul>
+
+                <p>So from a cost–benefit standpoint, noncompliance often makes economic sense. Paying a one-time fine or ignoring a warning is cheaper than fully overhauling IT and billing systems.</p>
+
+                <p>As previously mentioned, creating a compliant MRF is hard. It requires hospitals to extract data from multiple legacy billing systems, standardize payer contracts and service codes, build significant infrastructure, and maintain accuracy and updates. For large hospital systems, this can cost hundreds of thousands to millions of dollars in technical and compliance labor. There's a financial incentive to delay compliance and it outweighs the threat of enforcement.</p>
+
+                <p>There's also a lot of vagueness in these executive orders which hospitals exploit. For example, "Standard charge" and "shoppable service" can be interpreted loosely. And placeholder values (like "999,999,999") technically violate CMS rules, but the enforcement mechanisms just haven't kept up with these practices. Some hospitals post intentionally hard-to-read files or bury them on unindexed pages. The rules only say hospitals must <em>publish</em> the data on a "publicly available website," many interpret that as simply making it technically accessible. This means that it's not necessarily always <em>discoverable</em>. As long as the hospital can <em>technically claim</em> they posted a file, they can avoid deeper scrutiny.</p>
+
+                <p>Now earlier this year in February of 2025, The Trump administration issued EO 14221 titled <em>"Making America Healthy Again by Empowering Patients with Clear, Accurate, and Actionable Healthcare Pricing Information."</em> This directed the Departments of Treasury, Labor, and Health & Human Services (HHS) to take more aggressive steps to improve and enforce price transparency. However, it's still hard to tell if things are truly getting better. The EO did give more clarity on expectations but enforcement is still lacking. It's also not as if this order magically removed all the challenges the hospitals were facing to comply.</p>
+
+                <p>Patients deserve the right to know how much their services should cost. Hospitals need to be held accountable to price transparency. The solution is a central repository where patients can go for this "consumer-facing search platform". This ideally would be subsidized or in partnership with the government. Healthcare Bluebook is probably the best choice right now. However, it limits your amount of searches unless you're using an employers code, and their data isn't great. They don't even have all the machine readable files onboarded and are using averages and estimates. As a consumer, you really don't know <em>exactly</em> what you should be paying.</p>
+
+                <p>I want to build a future where healthcare costs aren't hidden, one that is truly "patient-first".</p>
+            </div>
+            </article>
+        </div>
+
+        <footer>
+            <a href="https://www.linkedin.com/in/mikisafronov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://x.com/mikisafr" target="_blank" rel="noopener noreferrer">X</a>
+        </footer>
+    </div>
+</body>
+</html>
