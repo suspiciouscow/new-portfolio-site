@@ -68,6 +68,39 @@ section {
     margin-bottom: 1rem;
 }
 
+.bio a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.bio a:hover {
+    color: #000;
+}
+
+.bio-org {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.bio-logo {
+    height: 1.15em;
+    width: 1.15em;
+    object-fit: cover;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+a.company {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.company:hover {
+    text-decoration: underline;
+}
+
 h2 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -92,6 +125,12 @@ h2 {
     flex-shrink: 0;
     width: 48px;
     height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-logo a {
     display: flex;
     align-items: center;
     justify-content: center;
