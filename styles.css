@@ -78,18 +78,16 @@ section {
     color: #000;
 }
 
-.bio-org {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-}
-
 .bio-logo {
-    height: 1.15em;
-    width: 1.15em;
+    display: inline-block;
+    height: 1.1em;
+    width: 1.1em;
+    max-height: 1.1em;
+    max-width: 1.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.15em;
     object-fit: cover;
     border-radius: 2px;
-    flex-shrink: 0;
 }
 
 a.company {
