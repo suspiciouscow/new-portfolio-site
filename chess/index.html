@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess - Miki S-Y</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="stylesheet" href="../styles.css?v=3">
+    <style>
+        .chess-page {
+            max-width: 520px;
+        }
+
+        .chess-intro {
+            color: #666;
+            margin: -2rem 0 2rem;
+            font-size: 1rem;
+        }
+
+        .chess-status {
+            min-height: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .chess-captures {
+            display: flex;
+            align-items: center;
+            gap: 0.15rem;
+            min-height: 1.75rem;
+            margin: 0.35rem 0;
+            flex-wrap: wrap;
+        }
+
+        .chess-captures img {
+            width: 1.45rem;
+            height: 1.45rem;
+            object-fit: contain;
+            margin-left: -0.28rem;
+        }
+
+        .chess-captures img:first-child {
+            margin-left: 0;
+        }
+
+        .chess-captures-advantage {
+            margin-left: 0.4rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .chess-board-wrap {
+            width: min(100%, 440px);
+            margin: 0.5rem auto 1.25rem;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .chess-board {
+            position: relative;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border: 1px solid #c8c8c8;
+            overflow: hidden;
+        }
+
+        .chess-board-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(8, minmax(0, 1fr));
+            grid-template-rows: repeat(8, minmax(0, 1fr));
+        }
+
+        .square {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+            padding: 0;
+            margin: 0;
+            border: none;
+            cursor: default;
+            font: inherit;
+            line-height: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            overflow: hidden;
+        }
+
+        .square.light { background: #f0d9b5; }
+        .square.dark { background: #b58863; }
+        .square.movable { cursor: pointer; }
+        .square.selected { box-shadow: inset 0 0 0 3px rgba(20, 20, 20, 0.55); }
+        .square.legal::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 28%;
+            height: 28%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.18);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+        .square.legal.capture::after {
+            width: 86%;
+            height: 86%;
+            background: transparent;
+            border: 6px solid rgba(0, 0, 0, 0.16);
+            box-sizing: border-box;
+        }
+        .square.last-move.light { background: #cdd26a; }
+        .square.last-move.dark { background: #aaa23a; }
+        .square.check { box-shadow: inset 0 0 0 3px #c0392b; }
+
+        .piece {
+            position: absolute;
+            inset: 8%;
+            width: 84%;
+            height: 84%;
+            margin: auto;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            z-index: 1;
+        }
+
+        .chess-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .chess-btn {
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #333;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .chess-btn:hover {
+            border-color: #999;
+            color: #000;
+        }
+
+        .chess-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .chess-note {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .chess-engine-state {
+            color: #999;
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container chess-page">
+        <nav class="main-nav">
+            <a href="../index.html">Home</a>
+            <a href="../writing.html">Writing</a>
+        </nav>
+
+        <header>
+            <h1>Chess</h1>
+        </header>
+
+        <p class="chess-intro">Play against Miki (~1200).</p>
+        <p class="chess-status" id="status">Your turn — you play white.</p>
+        <p class="chess-engine-state" id="engineState">Loading engine…</p>
+
+        <div class="chess-board-wrap">
+            <div class="chess-captures" id="capturesTop" aria-label="Pieces you captured"></div>
+            <div class="chess-board" aria-label="Chess board">
+                <div class="chess-board-grid" id="board"></div>
+            </div>
+            <div class="chess-captures" id="capturesBottom" aria-label="Pieces Miki captured"></div>
+        </div>
+
+        <div class="chess-actions">
+            <button type="button" class="chess-btn" id="newGame">New game</button>
+            <button type="button" class="chess-btn" id="undo" disabled>Undo</button>
+        </div>
+
+        <p class="chess-note">You found the secret board. No link on the site — just <code>/chess</code>.</p>
+
+        <footer>
+            <a href="https://www.linkedin.com/in/mikisafronov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://x.com/mikisafr" target="_blank" rel="noopener noreferrer">X</a>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="chess.js"></script>
+</body>
+</html>
