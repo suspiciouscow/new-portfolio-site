@@ -576,8 +576,15 @@ footer a:hover {
     font-size: 0.9rem;
     color: #666;
     text-align: center;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0;
     font-style: italic;
+    line-height: 1.4;
+}
+
+.blog-image .image-caption {
+    display: block;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
 }
 
 footer p {
