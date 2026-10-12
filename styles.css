@@ -78,6 +78,24 @@ section {
     color: #000;
 }
 
+.lang-hint {
+    cursor: help;
+}
+
+.lang-word {
+    border-bottom: 1px dotted #999;
+}
+
+.lang-list {
+    display: none;
+}
+
+.lang-hint:hover .lang-list,
+.lang-hint:focus .lang-list,
+.lang-hint:focus-within .lang-list {
+    display: inline;
+}
+
 .bio img.bio-logo {
     display: inline-block;
     width: 18px;
